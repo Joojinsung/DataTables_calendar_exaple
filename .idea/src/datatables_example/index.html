@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTables Example with Ajax</title>
+
+        <!--css-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+<body>
+<h1>DataTables Example with Ajax</h1>
+<table id="myTable" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>직업</th>
+        <th>나이</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<!-- DataTables 초기화 및 Ajax 호출 -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "data.json",
+            dataType: "json",
+            success: function(data) {
+                $('#myTable').DataTable({
+                    data: data,
+                    columns: [
+                        { data: "name" },
+                        { data: "job" },
+                        { data: "age" }
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error loading data:", error);
+            }
+        });
+    });
+</script>
+</body>
+</html>
